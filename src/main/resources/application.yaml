@@ -1,0 +1,33 @@
+##Application Name to appear in Azure App Insights
+spring:
+  application:
+    name: event-driven-test
+
+server:
+  port: 8090
+  application:
+    name: event-driven-test
+
+ahold:
+  integration:
+    jms:
+      jndi:
+        publish:
+          headers:
+            source-id: AP000001985
+            source: STMS
+          topic:
+            enabled: false
+            name: StoreOrderReference
+            destination: STMS.Subscriber
+            connection-factory: JNDIConnection
+            provider-url: nsp://192.168.1.6:9000
+            initial-context-factory: com.pcbsys.nirvana.nSpace.NirvanaContextFactory
+        subscribe:
+          topic:
+            enabled: true
+            name: StoreOrderReference
+            destination: STMS.Subscriber
+            connection-factory: JNDIConnection
+            provider-url: nsp://192.168.1.6:9000
+            initial-context-factory: com.pcbsys.nirvana.nSpace.NirvanaContextFactory
